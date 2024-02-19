@@ -4,28 +4,44 @@ import { Component, ViewChild, ViewContainerRef } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   title = 'host-app';
 
-  @ViewChild('placeholder', { read: ViewContainerRef }) placeholderContainerRef!: ViewContainerRef;
+  @ViewChild('placeholder', { read: ViewContainerRef })
+  placeholderContainerRef!: ViewContainerRef;
 
   ngOnInit() {
-    this.loadHelloWorldRemote();
+    // this.loadHelloWorldRemote();
+    this.reactAppRemote();
   }
 
   private async loadHelloWorldRemote() {
     const comp = await loadRemoteModule({
-      type: "module",
-      remoteEntry: "http://localhost:4300/remoteEntry.js",
-      exposedModule: "./HelloComponent",
+      type: 'module',
+      remoteEntry: 'http://localhost:4300/remoteEntry.js',
+      exposedModule: './HelloComponent',
     });
-    
-    const ref: any = this.placeholderContainerRef.createComponent(comp.HelloComponent);
-    
+
+    const ref: any = this.placeholderContainerRef.createComponent(
+      comp.HelloComponent
+    );
+
     setTimeout(() => {
-      ref.instance.title = "Bala";
+      ref.instance.title = 'Bala';
     }, 3000);
+  }
+
+  private async reactAppRemote() {
+    const comp = await loadRemoteModule({
+      type: 'module',
+      remoteEntry: 'http://localhost:4400/remoteEntry.js',
+      exposedModule: './ReactComponent',
+    });
+
+    const ref: any = this.placeholderContainerRef.createComponent(
+      comp.ReactComponent
+    );
   }
 }

@@ -5,26 +5,42 @@ import { RouterModule, Routes } from '@angular/router';
 const MFE_APP_URL = "http://localhost:4300/remoteEntry.js";
 
 const routes: Routes = [
-  { 
-    path: 'hello', 
+  {
+    path: 'hello',
     loadComponent: () => {
       return loadRemoteModule({
-        type: "module",
+        type: 'module',
         remoteEntry: MFE_APP_URL,
-        exposedModule: "./HelloComponent",
-      }).then(m => m.HelloComponent).catch(err => console.log(err));
-    }
+        exposedModule: './HelloComponent',
+      })
+        .then((m) => m.HelloComponent)
+        .catch((err) => console.log(err));
+    },
   },
   {
-    path: 'registration', 
+    path: 'registration',
     loadChildren: () => {
       return loadRemoteModule({
-        type: "module",
+        type: 'module',
         remoteEntry: MFE_APP_URL,
-        exposedModule: "./RegistrationModule",
-      }).then(m => m.RegistrationModule).catch(err => console.log(err));
-    }
-  }
+        exposedModule: './RegistrationModule',
+      })
+        .then((m) => m.RegistrationModule)
+        .catch((err) => console.log(err));
+    },
+  },
+  {
+    path: 'reacthello',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: MFE_APP_URL,
+        exposedModule: './ReacthelloModule',
+      })
+        .then((m) => m.ReacthelloModule)
+        .catch((err) => console.log(err));
+    },
+  },
 ];
 
 @NgModule({
