@@ -1,0 +1,18 @@
+:host{
+    padding: 10px;
+}
+.nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    a {
+        margin: 0;
+        text-decoration: underline;
+        color: #000;
+        padding-right: 10px;
+        &:hover {
+            color: blue;
+            text-decoration: none;
+        }
+    }
+}

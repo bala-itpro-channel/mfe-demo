@@ -1,0 +1,8 @@
+<p>product List</p>
+<div *ngIf="products.length">
+    <ul>
+        <li *ngFor="let product of products">
+            <a [routerLink]="['/product', product]">{{product}}</a>
+        </li>
+    </ul>
+</div>
